@@ -1,9 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import Header from '../components/Header'
-
+import { ThemeProvider } from '../components/ThemeProvider'
 import appCss from '../styles.css?url'
 
 export const Route = createRootRoute({
@@ -17,7 +15,12 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: '陸強恕 (John Lu) - Senior Frontend Engineer',
+      },
+      {
+        name: 'description',
+        content:
+          'Senior Frontend Engineer with expertise in TypeScript, React, Vue, and full-stack development. Based in Taipei, Taiwan.',
       },
     ],
     links: [
@@ -33,24 +36,15 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="zh-TW">
       <head>
         <HeadContent />
       </head>
       <body>
-        <Header />
-        {children}
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
+        <ThemeProvider>
+          <Header />
+          {children}
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>
