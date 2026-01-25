@@ -97,7 +97,7 @@ function App() {
 								{/* Front */}
 								<div className="absolute inset-0 rounded-full shadow-xl shadow-blue-500/25 dark:shadow-cyan-500/30 backface-hidden overflow-hidden">
 									<img
-										src="/src/assets/photo_caton.png"
+										src="/person/photo_caton.png"
 										alt="Profile"
 										className="w-full h-full object-cover"
 									/>
@@ -105,7 +105,7 @@ function App() {
 								{/* Back */}
 								<div className="absolute inset-0 rounded-full shadow-xl shadow-purple-500/25 dark:shadow-purple-500/30 backface-hidden transform-[rotateY(180deg)] overflow-hidden">
 									<img
-										src="/src/assets/photo.png"
+										src="/person/photo.png"
 										alt="Profile Back"
 										className="w-full h-full object-cover"
 									/>
