@@ -11,52 +11,11 @@ import {
 	ArrowRight,
 } from "lucide-react";
 import { projects } from "../data/projects";
+import { experiences } from "../data/experiences";
 
 export const Route = createFileRoute("/")({ component: App });
 
 function App() {
-	const experiences = [
-		{
-			title: "Sr. Frontend Engineer",
-			company: "創星物聯科技有限公司",
-			companyUrl: "https://www.trans-iot.com/tw/about/",
-			location: "Remote / Taipei",
-			period: "2024/02 - Present",
-			techStack: "NodeJS, TypeScript (Vue, React), Python, PostgreSQL, GCP",
-			highlights: [
-				"主導遠端前端開發，使用 Nuxt/Next 框架",
-				"透過 AI 輔助提供 Python/FastAPI 後端支援",
-				"負責四個核心平台的跨部門協調",
-				"透過 GitHub PR 審查推動程式碼品質改善",
-			],
-		},
-		{
-			title: "Frontend Engineer",
-			company: "104人力銀行",
-			companyUrl: "https://www.104.com.tw/",
-			location: "Taipei",
-			period: "2023/05 - 2024/02",
-			techStack: "NodeJS, TypeScript (Vue), Redis, AWS",
-			highlights: [
-				"使用 Nuxt (Vue) 框架執行 Scrum 開發流程",
-				"主導 SSO 身份驗證整合與 PoC 專案",
-				"將樣式從 SCSS 遷移至 Tailwind CSS",
-			],
-		},
-		{
-			title: "Frontend Engineer",
-			company: "精鏡傳媒 - 鏡文學、鏡好聽",
-			companyUrl: "https://www.mirrorvoice.com.tw/",
-			location: "Taipei",
-			period: "2022/03 - 2023/04",
-			techStack: "NodeJS, JavaScript (Vue, React), GraphQL, GCP",
-			highlights: [
-				"開發內容平台與活動專案",
-				"負責 SSR、身份驗證、支付系統",
-				"處理 Docker 容器化與雲端部署",
-			],
-		},
-	];
 
 	const previousExperience = [
 		{
@@ -191,24 +150,21 @@ function App() {
 						</h2>
 					</div>
 					<div className="space-y-4">
-						{experiences.map((exp, index) => (
-							<div
-								key={index}
-								className="group bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-blue-200 dark:hover:border-cyan-900 transition-all duration-300"
+						{experiences.map((exp) => (
+							<Link
+								key={exp.id}
+								to="/experience/$experienceId"
+								params={{ experienceId: exp.id }}
+								className="group block bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-blue-200 dark:hover:border-cyan-900 transition-all duration-300 cursor-pointer"
 							>
 								<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
 									<div>
-										<h3 className="text-xl font-semibold text-zinc-900 dark:text-white">
+										<h3 className="text-xl font-semibold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors duration-200">
 											{exp.title}
 										</h3>
-										<a
-											href={exp.companyUrl}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="text-blue-600 dark:text-cyan-400 font-medium hover:underline cursor-pointer"
-										>
+										<span className="text-blue-600 dark:text-cyan-400 font-medium">
 											{exp.company}
-										</a>
+										</span>
 									</div>
 									<div className="text-zinc-500 dark:text-zinc-400 text-sm mt-2 md:mt-0 md:text-right">
 										<p className="font-medium">{exp.period}</p>
@@ -224,12 +180,19 @@ function App() {
 											key={i}
 											className="text-zinc-600 dark:text-zinc-300 flex items-start gap-3"
 										>
-											<span className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-cyan-400 mt-2 flex-shrink-0" />
+											<span className="w-1.5 h-1.5 rounded-full bg-blue-500 dark:bg-cyan-400 mt-2 shrink-0" />
 											{highlight}
 										</li>
 									))}
 								</ul>
-							</div>
+								<div className="flex items-center gap-1 text-blue-600 dark:text-cyan-400 text-sm font-medium mt-4">
+									查看詳情
+									<ArrowRight
+										size={16}
+										className="group-hover:translate-x-1 transition-transform duration-200"
+									/>
+								</div>
+							</Link>
 						))}
 					</div>
 				</section>

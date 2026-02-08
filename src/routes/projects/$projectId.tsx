@@ -3,12 +3,9 @@ import {
 	ArrowLeft,
 	ExternalLink,
 	Github,
-	ImageOff,
-	ChevronLeft,
-	ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
 import { getProjectById } from "../../data/projects";
+import { ImageCarousel } from "../../components/ImageCarousel";
 
 export const Route = createFileRoute("/projects/$projectId")({
 	component: ProjectDetail,
@@ -17,8 +14,6 @@ export const Route = createFileRoute("/projects/$projectId")({
 function ProjectDetail() {
 	const { projectId } = Route.useParams();
 	const project = getProjectById(projectId);
-	const [currentImageIndex, setCurrentImageIndex] = useState(0);
-	const [imageError, setImageError] = useState<Record<number, boolean>>({});
 
 	if (!project) {
 		return (
@@ -38,18 +33,6 @@ function ProjectDetail() {
 			</div>
 		);
 	}
-
-	const nextImage = () => {
-		setCurrentImageIndex((prev) =>
-			prev === project.screenshots.length - 1 ? 0 : prev + 1,
-		);
-	};
-
-	const prevImage = () => {
-		setCurrentImageIndex((prev) =>
-			prev === 0 ? project.screenshots.length - 1 : prev - 1,
-		);
-	};
 
 	return (
 		<div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
@@ -77,73 +60,10 @@ function ProjectDetail() {
 				</div>
 
 				{/* Screenshots Carousel */}
-				{project.screenshots.length > 0 && (
-					<div className="mb-8">
-						<div className="relative bg-zinc-200 dark:bg-zinc-800 rounded-2xl overflow-hidden aspect-video shadow-lg">
-							{imageError[currentImageIndex] ? (
-								<div className="absolute inset-0 flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-500">
-									<ImageOff size={48} className="mb-2" />
-									<p>圖片載入失敗</p>
-									<p className="text-sm mt-1">
-										請稍後新增截圖至 public/projects/
-									</p>
-								</div>
-							) : (
-								<div className="w-full h-full">
-									<img
-										src={project.screenshots[currentImageIndex]}
-										alt={`${project.name} screenshot ${currentImageIndex + 1}`}
-										className="w-full h-full object-contain"
-										onError={() =>
-											setImageError((prev) => ({
-												...prev,
-												[currentImageIndex]: true,
-											}))
-										}
-									/>
-								</div>
-							)}
-
-							{/* Navigation Arrows */}
-							{project.screenshots.length > 1 && (
-								<>
-									<button
-										onClick={prevImage}
-										className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/50 hover:bg-black/70 text-white rounded-xl transition-all duration-200 cursor-pointer backdrop-blur-sm"
-										aria-label="Previous image"
-									>
-										<ChevronLeft size={24} />
-									</button>
-									<button
-										onClick={nextImage}
-										className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/50 hover:bg-black/70 text-white rounded-xl transition-all duration-200 cursor-pointer backdrop-blur-sm"
-										aria-label="Next image"
-									>
-										<ChevronRight size={24} />
-									</button>
-								</>
-							)}
-						</div>
-
-						{/* Dots Indicator */}
-						{project.screenshots.length > 1 && (
-							<div className="flex justify-center gap-2 mt-4">
-								{project.screenshots.map((_, index) => (
-									<button
-										key={index}
-										onClick={() => setCurrentImageIndex(index)}
-										className={`w-2 h-2 rounded-full transition-all duration-200 cursor-pointer ${
-											index === currentImageIndex
-												? "bg-blue-600 dark:bg-cyan-400 w-6"
-												: "bg-zinc-300 dark:bg-zinc-600 hover:bg-zinc-400 dark:hover:bg-zinc-500"
-										}`}
-										aria-label={`Go to image ${index + 1}`}
-									/>
-								))}
-							</div>
-						)}
-					</div>
-				)}
+				<ImageCarousel
+					screenshots={project.screenshots}
+					alt={project.name}
+				/>
 
 				{/* Tech Stack */}
 				<div className="mb-8">
