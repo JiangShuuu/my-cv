@@ -20,7 +20,7 @@ export const experiences: Experience[] = [
 		location: "Remote / Taipei",
 		period: "2024/02 - Present",
 		techStack:
-			"TypeScript, Vue(Nuxt.js), React(Next.js), Python, PostgreSQL, GCP",
+			"TypeScript, Vue(Nuxt.js), React(Next.js), Python, PostgreSQL, GraphQL, GCP",
 		highlights: [
 			"主導遠端前端開發，使用 Nuxt/Next 框架",
 			"透過 AI 輔助提供 Python/FastAPI 後端支援",
@@ -55,7 +55,7 @@ export const experiences: Experience[] = [
 		companyUrl: "https://www.104.com.tw/",
 		location: "Taipei",
 		period: "2023/05 - 2024/02",
-		techStack: "NodeJS, TypeScript (Vue), Redis, AWS",
+		techStack: "TypeScript, Vue(Nuxt.js), Redis, AWS",
 		highlights: [
 			"使用 Nuxt (Vue) 框架執行 Scrum 開發流程",
 			"主導 SSO 身份驗證整合與 PoC 專案",
@@ -85,7 +85,7 @@ export const experiences: Experience[] = [
 		companyUrl: "https://www.mirrorvoice.com.tw/",
 		location: "Taipei",
 		period: "2022/03 - 2023/04",
-		techStack: "NodeJS, JavaScript (Vue, React), GraphQL, GCP",
+		techStack: "TypeScript, Vue(Nuxt.js), React(Next.js), GraphQL, GCP",
 		highlights: [
 			"開發內容平台與活動專案",
 			"負責 SSR、身份驗證、支付系統",
