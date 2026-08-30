@@ -4,6 +4,8 @@ import Header from '../components/Header'
 import { ThemeProvider } from '../components/ThemeProvider'
 import appCss from '../styles.css?url'
 
+const adsenseClient = import.meta.env.VITE_ADSENSE_CLIENT
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -22,6 +24,9 @@ export const Route = createRootRoute({
         content:
           'Senior Frontend Engineer with expertise in TypeScript, React, Vue, and full-stack development. Based in Taipei, Taiwan.',
       },
+      ...(adsenseClient
+        ? [{ name: 'google-adsense-account', content: adsenseClient }]
+        : []),
     ],
     links: [
       {
@@ -44,6 +49,17 @@ export const Route = createRootRoute({
         sizes: '180x180',
         href: '/logo/JL.png',
       },
+    ],
+    scripts: [
+      ...(adsenseClient
+        ? [
+            {
+              src: `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`,
+              async: true,
+              crossOrigin: 'anonymous' as const,
+            },
+          ]
+        : []),
     ],
   }),
 
